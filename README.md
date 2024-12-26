@@ -1,134 +1,130 @@
 # HogarHaven E-commerce Application
 
-## Project Overview
+## Overview
 
-The HogarHaven E-commerce Application is a web-based enterprise solution designed for an online retailer specializing in smart home devices. The application allows customers to browse and purchase products, manage their accounts, and interact with various functionalities, while store managers and sales staff can manage inventory and orders efficiently.
-
-This project implements object-oriented design principles and follows the Model-View-Controller (MVC) architecture to ensure flexibility, reusability, and extensibility.
-
----
+HogarHaven is a servlet-based web application for an online retailer that allows customers to browse and purchase smart home products. The application supports customer account management, order placement, and product reviews, with additional features like trending products, inventory, and sales reports, as well as AI-driven recommendations and customer service ticketing. The platform uses **React** for the frontend, **Node.js** for the backend, and **MySQL** and **MongoDB** for database management.
 
 ## Features
 
-### **Customer Functionalities**
-
-- **Account Management**: Create accounts, log in, and manage personal information.
-- **Product Browsing**: View product categories and details, including associated accessories.
-- **Shopping Cart**: Add or remove items from the cart and view the current selection.
-- **Order Placement**: Place orders for home delivery or in-store pickup with real-time data storage in MySQL.
-- **Order Management**: Check order status, cancel orders, and view order history.
-- **Payment Integration**: Secure credit card payment processing.
-- **Product Reviews**: Submit and view reviews, stored in a MongoDB NoSQL database.
-- **Trending Products**: View trends such as top-rated products, most sold items, and best-performing regions.
-- **Customer Service**:
-  - Open a ticket by submitting text and an image for a received shipment.
-  - Check ticket status with decisions like Refund, Replace, or Escalate to Human Agent using OpenAI models.
-- **Review Search and Product Recommendations**:
-  - Search for semantically similar reviews using OpenAI embeddings and ElasticSearch.
-  - Recommend products based on semantic similarity to user input.
-
-### **Store Manager Functionalities**
-
-- **Inventory Management**: Add, update, or delete products.
-- **Sales Reporting**: Generate reports for sales and visualize data using Google Charts.
-- **Inventory Reporting**: Monitor stock levels and product status (e.g., on sale, with rebates).
-
-### **Advanced Functionalities**
-
-- **Search Auto-Completion**: Real-time search suggestions powered by MySQL and AJAX.
-- **Analytics**:
-  - Top 5 most liked products.
-  - Top 5 ZIP codes with maximum sales.
-  - Top 5 most sold products.
-
----
-
-## Additional Requirements
-
-### **Customer Service Module**
-
-1. Add a **Customer Service** button/link to the menu bar.
-2. On click, provide options:
-   - **Open a Ticket**: Allows the user to submit a text description and upload an image of a received shipment. Assigns a unique ticket number upon submission.
-   - **Status of a Ticket**: Lets the user check the status of a ticket by entering its number, with possible decisions:
-     1. Refund Order
-     2. Replace Order
-     3. Escalate to Human Agent
-3. Use OpenAI models to analyze submitted images and determine the ticket decision.
-4. Demonstrate the feature with six pre-defined tickets covering all three cases (Refund, Replace, Escalate).
-
----
+- **Product Categories**:
+  - Smart Doorbells
+  - Smart Doorlocks
+  - Smart Speakers
+  - Smart Lightings
+  - Smart Thermostats
+- **Customer Functionality**:
+  - Create and manage accounts
+  - Place orders with store pickup or home delivery
+  - View order status, cancel orders, and leave product reviews
+  - Payment via credit card
+  - Search and browse products
+  - Submit and view product reviews
+  - AI-based product recommendations and semantic search for reviews
+- **Store Manager Features**:
+  - Add, update, and delete products
+  - Generate inventory and sales reports
+  - View trending products and customer reviews
+  - Manage customer service tickets
 
 ## Technologies Used
 
-- **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Node.js, Express.js
-- **Databases**:
-  - MongoDB for NoSQL data storage (e.g., product reviews).
-  - MySQL for relational data (e.g., user accounts and transactions).
-- **Search Engine**: ElasticSearch managed using Docker.
-- **Architecture**: MVC Pattern
-- **AI Models**: OpenAI GPT and Embedding Models
-- **Programming Principles**: Object-Oriented Design
+- **Frontend**: React.js
+- **Backend**: Node.js, Express
+- **Databases**: MySQL, MongoDB, Elasticsearch
+- **APIs**: OpenAI (GPT-4), ElasticSearch
+- **Tools**: Docker, GitHub, Jira
 
----
+## Database Setup
 
-## Project Structure
+### MySQL
 
-- **Frontend**: JavaScript-based components for UI/UX and interaction.
-- **Backend**: Node.js + Express.js handles business logic and data communication.
-- **Databases**:
-  - MySQL for user accounts, transactions, and inventory.
-  - MongoDB for customer reviews.
-  - ElasticSearch for product and review embeddings, managed using Docker.
-- **Utilities**:
-  - Backend services for handling CRUD operations and search.
-- **Reports**: Dynamic reports for inventory and sales data.
+- MySQL is used to store:
+  - Product catalog
+  - Customer information
+  - Orders and transactions
+  - Store locations
+  - Customer reviews
+- Ensure you have a running MySQL instance with the following tables:
+  - **Stores**: StoreID, Address, City, State, Zip-code
+  - **Products**: ProductID, Name, Price, Description, Category, Accessories
+  - **Customers**: UserID, Name, Address, Email, etc.
+  - **Transactions**: TransactionID, OrderDetails, PaymentInfo, ShippingCost, TotalSales
+  - **ProductReviews**: ReviewID, ProductID, Rating, ReviewText, UserID
 
----
+### MongoDB
 
-## How to Install and Run
+- MongoDB stores product reviews with detailed metadata.
 
-1. **Pre-requisites**:
+## Installation
 
-   - MySQL, MongoDB, and ElasticSearch installed and running.
-   - Docker installed for managing ElasticSearch.
-   - Node.js installed for the backend.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/smarthomes.git
+   cd smarthomes
+   ```
 
-2. **Database Setup**:
+#### Frontend:
 
-   - Import the MySQL schema for products, users, and transactions.
-   - Initialize MongoDB collections for product reviews.
-   - Use Docker to set up ElasticSearch and store embeddings.
+```bash
+cd client
+npm install
+```
 
-3. **Backend**:
+#### Backend:
 
-   - Navigate to the backend project directory.
-   - Run `npm install` to install dependencies.
-   - Start the server using `node server.js`.
+```bash
+cd server
+npm install
+```
 
-4. **Frontend**:
+### Set up the databases:
 
-   - Navigate to the frontend project directory.
-   - Run `npm install` to install dependencies.
-   - Start the frontend development server using `npm start`.
+- **MySQL**: Create the necessary tables using the provided SQL scripts.
+- **MongoDB**: Ensure the MongoDB instance is running.
+- **Elasticsearch**: Set up for semantic search features.
 
-5. **Access**:
-   - Open the application in a web browser at the specified localhost URL.
+### Configure `.env` files:
 
----
+- Update the `.env` files with your database credentials and other necessary configurations for MySQL, MongoDB, and Elasticsearch.
 
-## Known Limitations
+### Run the project:
 
-- The search auto-completion may require further optimization for larger datasets.
-- Reports are limited to bar chart visualizations for now.
+#### Frontend:
 
----
+```bash
+cd client
+npm start
+```
 
-## Future Enhancements
+#### Backend:
 
-- Integrate payment gateway APIs for enhanced security.
-- Expand reporting capabilities to include pie charts and line graphs.
-- Introduce a mobile-friendly design.
+```bash
+cd server
+npm start
+```
 
----
+## Usage
+
+1. Navigate to the SmartHomes website in your browser.
+2. Create an account or log in.
+3. Browse and search for products.
+4. Add items to your shopping cart and proceed to checkout.
+5. Choose store pickup or home delivery.
+6. Submit reviews for purchased products.
+7. Access customer service for ticket creation and status updates.
+
+## AI Features
+
+- **Trending Products**: View the top 5 most sold products, most liked products, and top zip codes for product sales.
+- **Product Recommendations**: Use OpenAI models to generate recommendations based on user search queries.
+- **Semantic Search for Reviews**: Search for reviews similar to entered keywords using embeddings in Elasticsearch.
+
+## Customer Service
+
+- **Open a Ticket**: Submit an issue with your received product, including an image, and receive a unique ticket number.
+- **Ticket Status**: Check the status of your ticket and receive a decision on refund, replacement, or escalation.
+
+## Reports
+
+- **Inventory Report**: Generate a table and bar chart showing the availability of products.
+- **Sales Report**: Generate tables and charts showing product sales and daily sales totals.
