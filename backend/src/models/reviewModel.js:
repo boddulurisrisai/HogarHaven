@@ -1,0 +1,27 @@
+const mongoose = require('mongoose');
+
+// Define the schema for product reviews
+const reviewSchema = new mongoose.Schema({
+  ProductCategory: String,
+  ProductModelName: String,
+  ProductPrice: Number,
+  StoreID: String,
+  StoreZip: String,
+  StoreCity: String,
+  StoreState: String,
+  ProductOnSale: Boolean,
+  ManufacturerName: String,
+  ManufacturerRebate: Boolean,
+  UserID: String,
+  UserAge: Number,
+  UserGender: String,
+  UserOccupation: String,
+  ReviewRating: Number,
+  ReviewDate: Date,
+  ReviewText: String,
+});
+
+// Create a model for the 'test_reviews' collection
+const Review = mongoose.model('test_reviews', reviewSchema);
+
+module.exports = { Review };
